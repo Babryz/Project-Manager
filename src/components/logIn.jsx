@@ -21,17 +21,16 @@ class LogIn extends React.Component {
     }
 
     getUser = async () => {
-        const body = JSON.stringify({
-            email: this.state.email,
-            password: this.state.password
-        })
         const apiCall = await 
             fetch(this.apiCall, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: body
+                body: JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password
+                })
             })
         const data = await apiCall.json()
         if (apiCall.status === 200) {
