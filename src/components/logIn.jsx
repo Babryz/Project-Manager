@@ -33,7 +33,6 @@ class LogIn extends React.Component {
                 },
                 body: body
             })
-        console.log('From function')
         const data = await apiCall.json()
         if (apiCall.status === 200) {
             sessionStorage.clear();
@@ -51,7 +50,6 @@ class LogIn extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log('From handle');
         this.getUser().catch(err => (sessionStorage.setItem('funcErr', err)))
     }
 
