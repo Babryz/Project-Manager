@@ -7,8 +7,7 @@ class LogIn extends React.Component {
             email: '',
             password: '',
             error: false,
-            errorMessage: '',
-            user: ''
+            errorMessage: ''
         }
     }
 
@@ -21,41 +20,80 @@ class LogIn extends React.Component {
         });
     }
 
-    handleSubmit = (event) => {
+    getUser = async () => {
+        const body = JSON.stringify({
+            email: this.state.email,
+            password: this.state.password
+        })
+        const apiCall = await 
             fetch(this.apiCall, {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json',
-                    'content-type': 'application/json'
+                    'Content-type': 'application/json'
                 },
-                body: JSON.stringify({
-                    email: this.state.email,
-                    password: this.state.password
-                })
-            }).then(res => res.json())
-                .then(data => console.log(data))
+                body: body
+            })
+        const data = await apiCall.json()
+        if (apiCall.status === 200) {
+            sessionStorage.clear();
+            sessionStorage.setItem('userID', data)
+            this.props.checkLogin()
+        } else {
+            sessionStorage.clear();
+            this.setState({
+                ...this.state,
+                error: true,
+                errorMessage: data.message
+            })
+        }
+    }
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.getUser().catch(err => (sessionStorage.setItem('funcErr', err)))
     }
 
     render() {
-        const { email, password } = this.state;
+        const { email, 
+                password, 
+                error, 
+                errorMessage } = this.state;
 
-        return (
-            <div className="login">
-                <h2>Sign In</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="email">E-mail: </label>
-                    <input type="text" value={email} onChange={this.handleChange} id="email"/>
+            return (
+                <div className="login">
+                    <h2>Sign In</h2>
+                    <form onSubmit={(event) => this.handleSubmit(event)}>
+                        <label htmlFor="email">E-mail: </label>
+                        <input 
+                            type="text" 
+                            value={email} 
+                            onChange={this.handleChange} 
+                            name="email" 
+                            id="email"
+                            required/>
+    
+                        <label htmlFor="password">Password: </label>
+                        <input 
+                            type="password" 
+                            value={password} 
+                            onChange={this.handleChange} 
+                            name="password" 
+                            id="password" 
+                            required/>
+    
+                        <input type="submit" value="Sign In" className="landing-btn"/>
+                    </form>
+    
+                    <p>No account yet? Register a new one <a href="https://www.fuckreact.com">here!</a></p>
+                    { error ?  
+                    <div className="error">
+                        <h3>{errorMessage}</h3>
+                    </div> 
+                    : <div></div> }
+                    
+                </div>
+            )
 
-                    <label htmlFor="password">Password: </label>
-                    <input type="text" value={password} onChange={this.handleChange} id="password" type="password"/>
-
-                    <input type="submit" value="Sign In" className="landing-btn"/>
-                </form>
-
-                <p>No account yet? Register a new one <a href="#">here!</a></p>
-            </div>
-        )
     }
 }
 

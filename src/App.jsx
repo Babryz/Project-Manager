@@ -7,26 +7,58 @@ class App extends React.Component {
     super();
     this.state = {
       screenWidth: 400,
-      loggedIn: false,
+      loggedIn: sessionStorage.getItem('userID') ? true : false,
+      user: {
+
+      }
     }
   }
 
-  handleLogin = () => {
+  getUser = async () => {
+    if (this.state.loggedIn && sessionStorage.getItem('userID')) {
+      const userID = await sessionStorage.getItem('userID')
+      const apiCall = await fetch(`http://localhost:8000/users/${userID}`)
+      const data = await apiCall.json()
+      if (apiCall.status === 200) {
+        this.setState({
+          ...this.state,
+          user: data
+        })
+      }
+    }
+  }
+
+  checkLogin = () => {
     this.setState({
       ...this.state,
       loggedIn: true
     })
+  } 
+
+  componentDidMount() {
+    this.getUser();
+  }
+
+  componentDidUpdate() {
+    this.getUser();
   }
 
   render() {
-    const { screenWidth, loggedIn } = this.state;
+    const { screenWidth, loggedIn, user } = this.state;
     
     if (screenWidth < 500 ) {
       return (
         <div>
           { loggedIn ? 
-          <h1>Good you´re already logged in through your phone!</h1> :
-          <MobileLogin handleLogin={this.handleLogin}/> }
+          <div>
+            <h1>Hello there! Is this you?</h1>
+            <p>{user.firstName}</p>
+            <p>{user.lastName}</p>
+            <p>{user.email}</p>
+          </div>
+          
+           : <div><h1>{this.state.testData}</h1>
+          <MobileLogin checkLogin={this.checkLogin} /></div> }
         </div>
       )
     } else if (screenWidth > 500 && screenWidth < 900) {
