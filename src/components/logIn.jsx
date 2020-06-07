@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './login.css'
 
 class LogIn extends React.Component {
     constructor(props) {
@@ -21,17 +23,16 @@ class LogIn extends React.Component {
     }
 
     getUser = async () => {
-        const body = JSON.stringify({
-            email: this.state.email,
-            password: this.state.password
-        })
         const apiCall = await 
             fetch(this.apiCall, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: body
+                body: JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password
+                })
             })
         const data = await apiCall.json()
         if (apiCall.status === 200) {
@@ -84,7 +85,7 @@ class LogIn extends React.Component {
                         <input type="submit" value="Sign In" className="landing-btn"/>
                     </form>
     
-                    <p>No account yet? Register a new one <a href="https://www.fuckreact.com">here!</a></p>
+                    <p>No account yet? Register a new one <Link to="/sign-up">here!</Link></p>
                     { error ?  
                     <div className="error">
                         <h3>{errorMessage}</h3>

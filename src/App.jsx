@@ -1,6 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import MobileLogin from './components/mobileLogin';
+import Login from './components/logIn';
+import SignUp from './components/signUp';
+
+
 
 class App extends React.Component {
   constructor() {
@@ -48,18 +52,26 @@ class App extends React.Component {
     
     if (screenWidth < 500 ) {
       return (
-        <div>
-          { loggedIn ? 
+        <Router>
           <div>
-            <h1>Hello there! Is this you?</h1>
-            <p>{user.firstName}</p>
-            <p>{user.lastName}</p>
-            <p>{user.email}</p>
+            { loggedIn ? 
+            <div>
+              <h1>Hello there! Is this you?</h1>
+              <p>{user.firstName}</p>
+              <p>{user.lastName}</p>
+              <p>{user.email}</p>
+            </div>
+
+            
+             : <div>
+              <Switch>
+                <Route path="/" exact render={() => <Login checkLogin={this.checkLogin} />} />
+                <Route path="/sign-up" component={SignUp} />
+              </Switch>
+            </div>
+             }
           </div>
-          
-           : <div><h1>{this.state.testData}</h1>
-          <MobileLogin checkLogin={this.checkLogin} /></div> }
-        </div>
+        </Router>
       )
     } else if (screenWidth > 500 && screenWidth < 900) {
       return (
