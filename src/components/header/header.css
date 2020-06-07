@@ -1,0 +1,27 @@
+header {
+    background-color: #24873A;
+    display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+}
+
+h1 {
+    color: #FFFDED;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+nav {
+    display: flex;
+        align-content: space-between;
+}
+
+nav>a {
+    margin: 10px;
+    text-decoration: none;
+    color: #FFFDED;
+}
+
+nav>a:hover {
+    text-decoration: underline;
+}
