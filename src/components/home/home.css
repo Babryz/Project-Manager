@@ -1,0 +1,20 @@
+.sidebar {
+    border: 1px solid black;
+    border-radius: 25px;
+    background-color: #EFEBCA; 
+    margin: 20px;
+    padding: 10px;
+    max-width: 200px;
+    display: flex;
+        flex-direction: column;
+}
+
+.sidebar>div {
+    margin: 10px;
+}
+
+.sidebar>div>ul {
+    margin-top: 5px;
+    list-style: none;
+    text-decoration: underline;
+}
