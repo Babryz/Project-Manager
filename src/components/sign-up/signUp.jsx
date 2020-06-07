@@ -67,16 +67,36 @@ class SignUp extends React.Component {
                 <h2>Sign Up</h2>
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor="firstName">First Name:</label>
-                    <input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange} required/>
+                    <input  type="text" 
+                            value={this.state.firstName} 
+                            name="firstName"
+                            className="text-input" 
+                            onChange={this.handleChange} 
+                            required/>
 
                     <label htmlFor="lastName">Last Name:</label>
-                    <input type="text" value={this.state.lastName} name="lastName" onChange={this.handleChange} required/>
+                    <input  type="text" 
+                            value={this.state.lastName} 
+                            name="lastName" 
+                            className="text-input"
+                            onChange={this.handleChange} 
+                            required/>
 
                     <label htmlFor="email">E-mail:</label>
-                    <input type="text" value={this.state.email} name="email" onChange={this.handleChange} required/>
+                    <input  type="text" 
+                            value={this.state.email} 
+                            name="email" 
+                            className="text-input"
+                            onChange={this.handleChange} 
+                            required/>
 
                     <label htmlFor="password">Password:</label>
-                    <input type="password" value={this.state.password} name="password" onChange={this.handleChange} required/>
+                    <input  type="password" 
+                            value={this.state.password} 
+                            name="password"
+                            className="text-input" 
+                            onChange={this.handleChange} 
+                            required/>
                     <input type="submit" value="Sign Up" className="landing-btn"/>
                 </form>
                 {error ? <p><strong>{errorMessage}</strong></p> : false}

@@ -71,6 +71,7 @@ class LogIn extends React.Component {
                             onChange={this.handleChange} 
                             name="email" 
                             id="email"
+                            className="text-input"
                             required/>
     
                         <label htmlFor="password">Password: </label>
@@ -80,6 +81,7 @@ class LogIn extends React.Component {
                             onChange={this.handleChange} 
                             name="password" 
                             id="password" 
+                            className="text-input"
                             required/>
     
                         <input type="submit" value="Sign In" className="landing-btn"/>
