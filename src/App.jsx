@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import MobileLogin from './components/mobileLogin';
+import Login from './components/logIn';
 import SignUp from './components/signUp';
 
 
@@ -65,7 +65,7 @@ class App extends React.Component {
             
              : <div>
               <Switch>
-                <Route path="/" exact render={() => <MobileLogin checkLogin={this.checkLogin} />} />
+                <Route path="/" exact render={() => <Login checkLogin={this.checkLogin} />} />
                 <Route path="/sign-up" component={SignUp} />
               </Switch>
             </div>
