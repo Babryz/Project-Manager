@@ -1,16 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './App.css';
-import Login from './components/logIn';
-import SignUp from './components/signUp';
 
+import './App.css';
+
+import Login from './components/login/logIn';
+import SignUp from './components/sign-up/signUp';
+import Header from './components/header/header';
+import Home from './components/home/home';
+import Contact from './components/contact/contact';
 
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      screenWidth: 400,
       loggedIn: sessionStorage.getItem('userID') ? true : false,
       user: {
 
@@ -50,16 +53,16 @@ class App extends React.Component {
   render() {
     const { screenWidth, loggedIn, user } = this.state;
     
-    if (screenWidth < 500 ) {
       return (
         <Router>
           <div>
+            <Header />
             { loggedIn ? 
             <div>
-              <h1>Hello there! Is this you?</h1>
-              <p>{user.firstName}</p>
-              <p>{user.lastName}</p>
-              <p>{user.email}</p>
+              <Switch>
+                <Route path="/" exact component={Home} />
+                <Route path="/contact" component={Contact} />
+              </Switch>
             </div>
 
             
@@ -73,15 +76,6 @@ class App extends React.Component {
           </div>
         </Router>
       )
-    } else if (screenWidth > 500 && screenWidth < 900) {
-      return (
-        <h1>Hello Tablet user</h1>
-      ) 
-    } else {
-      return (
-        <h1>Hello Desktop User</h1>
-      )
-    }
   }
 }
 
