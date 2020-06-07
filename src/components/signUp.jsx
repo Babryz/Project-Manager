@@ -11,6 +11,8 @@ class SignUp extends React.Component {
             lastName: '',
             email: '',
             password: '',
+            error: false,
+            errorMessage: ''
         }
     }
 
@@ -23,8 +25,7 @@ class SignUp extends React.Component {
         });
     }
 
-
-    handleSubmit = async (event) => {
+    register = async (event) => {
         const apiCall = await 
             fetch(this.apiCall, {
                 method: 'POST',
@@ -39,13 +40,32 @@ class SignUp extends React.Component {
                     password: this.state.password
                 })
             })
+            const data = await apiCall.json();
+            if (apiCall.status === 200) {
+                window.location.replace('http://localhost:3000/');
+            } else {
+                this.setState({
+                    ...this.state,
+                    error: true,
+                    errorMessage: data.message
+                })
+            }
+    }
+
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        this.register(event)
+            .catch(err => {sessionStorage.setItem('funcErr', err)})
     }
 
     render() {
+        const { error, errorMessage } = this.state;
+
         return (
             <div className="signUp">
                 <h2>Sign Up</h2>
-                <form onSubmit={this.handleSubmit} action="/">
+                <form onSubmit={this.handleSubmit}>
                     <label htmlFor="firstName">First Name:</label>
                     <input type="text" value={this.state.firstName} name="firstName" onChange={this.handleChange} required/>
 
@@ -59,6 +79,7 @@ class SignUp extends React.Component {
                     <input type="password" value={this.state.password} name="password" onChange={this.handleChange} required/>
                     <input type="submit" value="Sign Up" className="landing-btn"/>
                 </form>
+                {error ? <p><strong>{errorMessage}</strong></p> : false}
                 <p>Already have an account? Log in <Link to="/">here!</Link></p>
             </div>
         )
