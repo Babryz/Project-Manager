@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import './header.css';
 
 class Header extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             loggedIn: sessionStorage.getItem('userID') ? true : false,
             user: {
@@ -38,15 +39,25 @@ class Header extends React.Component {
 
         return (
             <div>
-                <header>
+                { sessionStorage.getItem('userID') ? 
+                <header className="signedIn-header">
+                    <div></div>
+                    <div className="logo-and-menu">
+                        <h1>Project Manager</h1>
+                        <nav>
+                            <Link to="/">Home</Link>
+                            <Link to="/contact">Contact</Link>
+                        </nav>
+
+                    </div>
+               
+                    <button onClick={this.props.logout}><strong>Sign Out</strong></button> 
+                </header> :
+                <header className="signedOut-header">
                     <h1>Project Manager</h1>
-                    { sessionStorage.getItem('userID') ?  <nav>
-                        <Link to="/">Home</Link>
-                        <Link to="/contact">Contact</Link>
-                    </nav> :
-                    false }
-                    
-                </header>
+                </header> }
+
+                
             </div>
         )
     }

@@ -15,23 +15,6 @@ class App extends React.Component {
     super();
     this.state = {
       loggedIn: sessionStorage.getItem('userID') ? true : false,
-      user: {
-
-      }
-    }
-  }
-
-  getUser = async () => {
-    if (this.state.loggedIn && sessionStorage.getItem('userID')) {
-      const userID = await sessionStorage.getItem('userID')
-      const apiCall = await fetch(`http://localhost:8000/users/${userID}`)
-      const data = await apiCall.json()
-      if (apiCall.status === 200) {
-        this.setState({
-          ...this.state,
-          user: data
-        })
-      }
     }
   }
 
@@ -40,23 +23,23 @@ class App extends React.Component {
       ...this.state,
       loggedIn: true
     })
-  } 
-
-  componentDidMount() {
-    this.getUser();
   }
 
-  componentDidUpdate() {
-    this.getUser();
+  logout = () => {
+    sessionStorage.clear();
+    this.setState({
+      ...this.state,
+      loggedIn: false
+    })
   }
 
   render() {
-    const { screenWidth, loggedIn, user } = this.state;
+    const {loggedIn } = this.state;
     
       return (
         <Router>
           <div>
-            <Header />
+            <Header logout={this.logout} />
             { loggedIn ? 
             <div>
               <Switch>
