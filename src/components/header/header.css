@@ -1,8 +1,8 @@
 header {
     background-color: #24873A;
+    min-height: 100px;
     display: flex;
         flex-direction: column;
-        justify-content: space-around;
         align-items: center;
 }
 

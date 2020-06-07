@@ -28,7 +28,7 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
-        if (this.state.loggedIn) {
+        if (sessionStorage.getItem('userID')) {
             this.getUser();
         }
     }
@@ -40,10 +40,12 @@ class Header extends React.Component {
             <div>
                 <header>
                     <h1>Project Manager</h1>
-                    <nav>
+                    { sessionStorage.getItem('userID') ?  <nav>
                         <Link to="/">Home</Link>
                         <Link to="/contact">Contact</Link>
-                    </nav>
+                    </nav> :
+                    false }
+                    
                 </header>
             </div>
         )
