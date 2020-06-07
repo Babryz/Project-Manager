@@ -44,11 +44,19 @@ nav>a:hover {
     text-decoration: underline;
 }
 
+.logout-box {
+    display: flex;
+        align-items: center;
+}
+
+.logout-box>p {
+    color: #EFEBCA;
+}
+
 button {
     background-color: #EFEBCA;
     margin: 10px;
     padding: 5px;
     border-radius: 50px;
-    align-self: flex-start;
 
 }

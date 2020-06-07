@@ -35,7 +35,7 @@ class Header extends React.Component {
     }
 
     render() {
-        const { loggedIn, user } = this.state;
+        const { user } = this.state;
 
         return (
             <div>
@@ -50,8 +50,10 @@ class Header extends React.Component {
                         </nav>
 
                     </div>
-               
-                    <button onClick={this.props.logout}><strong>Sign Out</strong></button> 
+                    <div className="logout-box">
+                        <p><strong>{user.firstName}</strong></p>
+                        <button onClick={this.props.logout}><strong>Sign Out</strong></button>
+                    </div> 
                 </header> :
                 <header className="signedOut-header">
                     <h1>Project Manager</h1>
