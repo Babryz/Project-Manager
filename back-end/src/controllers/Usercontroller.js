@@ -16,7 +16,7 @@ module.exports = {
                     return res.json(user);
             } else {
                 return res.status(400).json({
-                    message: 'There already exists an account with that email. Try loggin in instead!'
+                    message: 'There already exists an account with that email. Try signing in in instead!'
                 })
             }
         } catch (err) {

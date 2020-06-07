@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const UserController  = require('./controllers/Usercontroller');
+
+const UserController = require('./controllers/Usercontroller');
+const ProjectController = require('./controllers/ProjectController');
 
 const app = express();
 
@@ -16,11 +18,10 @@ app.get('/', (req, res) => {
 })
 
 app.get('/users/:userId', UserController.getById);
-
 app.post('/register', UserController.store);
-
-
 app.post('/login', UserController.login);
+
+app.post('/addProject', ProjectController.store);
 
 try {
 	mongoose.connect(MongoDB, {
