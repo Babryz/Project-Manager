@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import './home.css';
 
 class Home extends React.Component {
@@ -94,7 +95,7 @@ class Home extends React.Component {
                                  <hr/>
                                 { error ? <p>{errorMessage}</p> : 
                                 <ul>{startedProjects.map((project, i) => (
-                                    <li key={i} >{project.title.length < 18 ? project.title : project.title.slice(0, 17) + '...'}</li>
+                                    <li key={i} ><Link to={`project/${project._id}`}>{project.title.length < 18 ? project.title : project.title.slice(0, 17) + '...'}</Link></li>
                                 ))}</ul> }
                              </div>
                              <div className="joined">
@@ -125,8 +126,8 @@ class Home extends React.Component {
                         <div className="browse">
                             { projects.map((project, i) => (
                                 <div className="project">
-                                    <h3>{project.title}</h3>
-                            {project.description.length < 200 ? <p>{project.description}</p> : <p>{project.description.slice(0, 197) + '...'}</p>}
+                                    <h3><Link to={`project/${project._id}`}>{project.title}</Link></h3>
+                                    {project.description.length < 200 ? <p>{project.description}</p> : <p>{project.description.slice(0, 197) + '...'}</p>}
                                 </div>
                             )) }
                         </div>
