@@ -64,6 +64,7 @@ main {
     border: 2px solid black;
     width: 100px;
     height: 30px;
+    font-size: 20px;
 }
 
 #latest-btn {
@@ -83,6 +84,7 @@ main {
 }
 
 .search>.search-input {
+    max-width: 200px;
     padding: 10px;
     margin: 0;
     border-radius: 25px 0px 0px 25px;

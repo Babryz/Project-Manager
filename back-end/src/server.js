@@ -22,6 +22,7 @@ app.post('/register', UserController.store);
 app.post('/login', UserController.login);
 
 app.post('/addProject', ProjectController.store);
+app.get('/projects', ProjectController.getAllProjects);
 app.get('/projects/:userId', ProjectController.getByUserId);
 app.get('/project/:projectId', ProjectController.getById);
 

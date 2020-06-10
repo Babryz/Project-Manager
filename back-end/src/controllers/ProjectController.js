@@ -23,6 +23,22 @@ module.exports = {
         }
     },
 
+    async getAllProjects(req, res) {
+        try {
+            const projects = await Project.find();
+
+            if (projects) {
+                return res.status(200).json(projects);
+            } else {
+                return res.status(400).json({
+                    message: 'Could not retrieve projects, try refreshing the page'
+                })
+            }
+        } catch (error) {
+            
+        }
+    },
+
     async getByUserId(req, res) {
         try {
             const { userId } = req.params;

@@ -5,47 +5,77 @@ class Home extends React.Component {
     constructor() {
         super();
         this.state = {
-            projects: {
-
-            },
+            projects: [],
+            startedProjects: [],
             isLoaded: false,
             error: false,
-            errorMessage: ''
+            errorMessage: '',
+            category: 'latest'
         }
     }
 
-    getStartedProjects = async () => {
-        const userID = await sessionStorage.getItem('userID');
-        const apiCall = await fetch(`http://localhost:8000/projects/${userID}`)
+    getAllProjects = async () => {
+        const apiCall = await fetch('http://localhost:8000/projects');
         const data = await apiCall.json();
-        
+
         if (apiCall.status === 200) {
             this.setState({
                 ...this.state,
                 projects: data,
                 isLoaded: true
             })
+        } 
+    }
+
+    getStartedProjects = async () => {
+        const userID = await sessionStorage.getItem('userID');
+        const apiCall = await fetch(`http://localhost:8000/projects/${userID}`);
+        const data = await apiCall.json();
+        
+        if (apiCall.status === 200) {
+            this.setState({
+                ...this.state,
+                startedProjects: data,
+            })
         } else {
             this.setState({
                 ...this.state,
                 error: true,
                 errorMessage: data.message,
-                isLoaded: true
             })
         }
         
     }
 
-    getLatestProjects = async () => {
-
+    handleClick = (e) => {
+        this.setState({
+            ...this.state,
+            category: e.target.value
+        })
     }
 
     componentDidMount() {
+        this.getAllProjects();
         this.getStartedProjects();
     }
 
     render() {
-        const { projects, isLoaded, error, errorMessage } = this.state;
+        const { projects, startedProjects, isLoaded, error, errorMessage, category } = this.state;
+
+        let popularClass = 'btn disabled';
+        let latestClass = 'btn';
+
+        if (category !== 'popular') {
+            popularClass = 'btn disabled';
+        } else {
+            popularClass = 'btn'
+        }
+
+        if (category !== 'latest') {
+            latestClass = 'btn disabled';
+        } else {
+            latestClass = 'btn';
+        }
 
         if (!isLoaded) {
             return (
@@ -53,6 +83,7 @@ class Home extends React.Component {
             )
         } else {
             console.log(projects);
+            console.log(startedProjects);
             return (
                 <div className="home-container">
                     <aside>
@@ -62,8 +93,8 @@ class Home extends React.Component {
                                  <h4>Started:</h4>
                                  <hr/>
                                 { error ? <p>{errorMessage}</p> : 
-                                <ul>{projects.map((project) => (
-                                    <li>{project.title.length < 18 ? project.title : project.title.slice(0, 17) + '...'}</li>
+                                <ul>{startedProjects.map((project, i) => (
+                                    <li key={i} >{project.title.length < 18 ? project.title : project.title.slice(0, 17) + '...'}</li>
                                 ))}</ul> }
                              </div>
                              <div className="joined">
@@ -82,14 +113,22 @@ class Home extends React.Component {
                             <p><strong>Browse Projects</strong></p>
                             <div className="filter-container">
                                 <div className="btn-container">
-                                    <button className={'btn' + ' disabled'} id="popular-btn"><strong>Popular</strong></button>
-                                    <button className="btn" id="latest-btn"><strong>Latest</strong></button>
+                                    <button onClick={this.handleClick} className={popularClass} id="popular-btn" value="popular">Popular</button>
+                                    <button onClick={this.handleClick} className={latestClass} id="latest-btn" value="latest" >Latest</button>
                                 </div>
                                 <form action="" className="search">
                                     <input type="text" placeholder="Searchterm" className="search-input"/>
                                     <input type="submit" value="Search" className="search-submit"/>
                                 </form>
                             </div>
+                        </div>
+                        <div className="browse">
+                            { projects.map((project, i) => (
+                                <div className="project">
+                                    <h2>{project.title}</h2>
+                                    <p>{project.description}</p>
+                                </div>
+                            )) }
                         </div>
                     </main>
                 </div>
