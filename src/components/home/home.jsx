@@ -125,8 +125,12 @@ class Home extends React.Component {
                         </div>
                         <div className="browse">
                             { projects.map((project, i) => (
-                                <div className="project">
+                                <div className="project" key={i}>
                                     <h3><Link to={`project/${project._id}`}>{project.title}</Link></h3>
+                                    <div className="img-container">
+                                        <img src="https://via.placeholder.com/200" alt="placeholder pic"/>
+                                        <img src="https://via.placeholder.com/200" alt="placeholder pic"/>
+                                    </div>
                                     {project.description.length < 200 ? <p>{project.description}</p> : <p>{project.description.slice(0, 197) + '...'}</p>}
                                 </div>
                             )) }
