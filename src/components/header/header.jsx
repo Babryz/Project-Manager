@@ -51,8 +51,8 @@ class Header extends React.Component {
 
                     </div>
                     <div className="logout-box">
-                        <p><strong>{user.firstName}</strong></p>
-                        <button onClick={this.props.logout}><strong>Sign Out</strong></button>
+                        <p><strong>{user.email}</strong></p>
+                        <button id="sign-out" onClick={this.props.logout}><strong>Sign Out</strong></button>
                     </div> 
                 </header> :
                 <header className="signedOut-header">

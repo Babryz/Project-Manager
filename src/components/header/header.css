@@ -53,7 +53,7 @@ nav>a:hover {
     color: #EFEBCA;
 }
 
-button {
+#sign-out {
     background-color: #EFEBCA;
     margin: 10px;
     padding: 5px;

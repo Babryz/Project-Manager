@@ -1,3 +1,11 @@
+.home-container {
+    display: flex;
+}
+
+main {
+    width: 80%;
+}
+
 .sidebar {
     border: 1px solid black;
     border-radius: 25px;
@@ -17,4 +25,65 @@
     margin-top: 5px;
     list-style: none;
     text-decoration: underline;
+}
+
+.head {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.head>p {
+    font-size: 20px;
+    margin: 30px;
+    margin-left: 50px;
+}
+
+.filter-container {
+    width: 50%;
+    display: flex;
+        align-items: center;
+        justify-content: space-around;
+}
+
+.btn-container {
+    display: flex;
+        align-items: center;
+}
+
+.btn.disabled {
+    background-color: #24873A;
+    color: #FFFDED;
+    border: 1px solid black;
+}
+
+.btn {
+    background-color: #FFFFFF;
+    color: black;
+    border: 2px solid black;
+    width: 100px;
+    height: 30px;
+}
+
+#latest-btn {
+    border-radius: 0px 25px 25px 0px;
+}
+
+#popular-btn {
+    border-radius: 25px 0px 0px 25px;
+}
+
+.search>.search-submit {
+    padding: 0px 10px;
+    margin: 0;
+    border-radius: 0px 25px 25px 0px;
+    background-color: #24873A;
+    color: #FFFDED;
+}
+
+.search>.search-input {
+    padding: 10px;
+    margin: 0;
+    border-radius: 25px 0px 0px 25px;
 }

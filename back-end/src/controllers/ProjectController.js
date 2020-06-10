@@ -26,7 +26,7 @@ module.exports = {
     async getByUserId(req, res) {
         try {
             const { userId } = req.params;
-            const projects = await Project.find({ userId })
+            const projects = await Project.find({ createdBy: userId })
 
             if (projects) {
                 return res.json(projects);
