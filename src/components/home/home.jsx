@@ -110,7 +110,7 @@ class Home extends React.Component {
                     </aside>
                     <main>
                         <div className="head">
-                            <p><strong>Browse Projects</strong></p>
+                            <h2>Browse Projects</h2>
                             <div className="filter-container">
                                 <div className="btn-container">
                                     <button onClick={this.handleClick} className={popularClass} id="popular-btn" value="popular">Popular</button>
@@ -125,8 +125,8 @@ class Home extends React.Component {
                         <div className="browse">
                             { projects.map((project, i) => (
                                 <div className="project">
-                                    <h2>{project.title}</h2>
-                                    <p>{project.description}</p>
+                                    <h3>{project.title}</h3>
+                            {project.description.length < 200 ? <p>{project.description}</p> : <p>{project.description.slice(0, 197) + '...'}</p>}
                                 </div>
                             )) }
                         </div>
