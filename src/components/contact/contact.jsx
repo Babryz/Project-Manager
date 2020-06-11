@@ -36,8 +36,8 @@ class Contact extends React.Component {
                                 <strong>Wondering about something?</strong>
                                 <p>First check our FAQ to see if your question has been answered there, 
                                     we've made the FAQ so you won't have to wait for us to get back to you on common questions or issues! <br/>
-                                    If you can't find your answer there, then feel free to email us at the adresses below and 
-                                    we'll get back to you as soon as possible!
+                                    If you can't find your issue there, then feel free to leave a ticket on it to the left or if
+                                    it's complex or urgent you can always contact us with the information below!
                                 </p>
                             </div>
                             <hr/>
