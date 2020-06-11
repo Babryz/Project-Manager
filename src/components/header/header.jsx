@@ -48,7 +48,7 @@ class Header extends React.Component {
             <div>
                 { sessionStorage.getItem('userID') ? 
                 <header className="signedIn-header">
-                    <div></div>
+                    <div id="spacing"></div>
                     <div className="logo-and-menu">
                         <h1>Project Manager</h1>
                         <nav>
