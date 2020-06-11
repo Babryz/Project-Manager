@@ -7,25 +7,24 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: sessionStorage.getItem('userID') ? true : false,
             user: {
 
-            }
+            },
+            userID: ''
         }
     }
 
     getUser = async () => {
-        if (this.state.loggedIn && sessionStorage.getItem('userID')) {
           const userID = await sessionStorage.getItem('userID')
-          const apiCall = await fetch(`http://localhost:8000/users/${sessionStorage.getItem('userID')}`)
+          const apiCall = await fetch(`http://localhost:8000/users/${userID}`)
           const data = await apiCall.json()
           if (apiCall.status === 200) {
             this.setState({
               ...this.state,
-              user: data
+              user: data,
+              userID: sessionStorage.getItem('userID')
             })
           }
-        }
     }
 
     componentDidMount() {
@@ -33,6 +32,14 @@ class Header extends React.Component {
             this.getUser();
         }
     }
+
+    componentDidUpdate() {
+        if (this.state.userID !== sessionStorage.getItem('userID')) {
+            this.getUser();
+        }
+    }
+
+    
 
     render() {
         const { user } = this.state;
