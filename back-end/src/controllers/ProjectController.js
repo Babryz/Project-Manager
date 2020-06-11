@@ -23,16 +23,32 @@ module.exports = {
         }
     },
 
+    async getAllProjects(req, res) {
+        try {
+            const projects = await Project.find();
+
+            if (projects) {
+                return res.status(200).json(projects);
+            } else {
+                return res.status(400).json({
+                    message: 'Could not retrieve projects, try refreshing the page'
+                })
+            }
+        } catch (error) {
+            
+        }
+    },
+
     async getByUserId(req, res) {
         try {
             const { userId } = req.params;
-            const projects = await Project.find({ userId })
+            const projects = await Project.find({ createdBy: userId })
 
-            if (projects) {
+            if (projects.length !== 0) {
                 return res.json(projects);
             } else {
                 return res.status(400).json({
-                    message: "Seems like you don't haven't created or joined any projects yet, might be time to get up on the horse!"
+                    message: "You haven't created any projects yet, might be time!"
                 })
             }
         } catch (error) {

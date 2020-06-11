@@ -7,25 +7,24 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: sessionStorage.getItem('userID') ? true : false,
             user: {
 
-            }
+            },
+            userID: ''
         }
     }
 
     getUser = async () => {
-        if (this.state.loggedIn && sessionStorage.getItem('userID')) {
           const userID = await sessionStorage.getItem('userID')
           const apiCall = await fetch(`http://localhost:8000/users/${userID}`)
           const data = await apiCall.json()
           if (apiCall.status === 200) {
             this.setState({
               ...this.state,
-              user: data
+              user: data,
+              userID: sessionStorage.getItem('userID')
             })
           }
-        }
     }
 
     componentDidMount() {
@@ -34,6 +33,14 @@ class Header extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        if (this.state.userID !== sessionStorage.getItem('userID')) {
+            this.getUser();
+        }
+    }
+
+    
+
     render() {
         const { user } = this.state;
 
@@ -41,7 +48,7 @@ class Header extends React.Component {
             <div>
                 { sessionStorage.getItem('userID') ? 
                 <header className="signedIn-header">
-                    <div></div>
+                    <div id="spacing"></div>
                     <div className="logo-and-menu">
                         <h1>Project Manager</h1>
                         <nav>
@@ -51,8 +58,8 @@ class Header extends React.Component {
 
                     </div>
                     <div className="logout-box">
-                        <p><strong>{user.firstName}</strong></p>
-                        <button onClick={this.props.logout}><strong>Sign Out</strong></button>
+                        <p><strong>{user.email}</strong></p>
+                        <button id="sign-out" onClick={this.props.logout}><strong>Sign Out</strong></button>
                     </div> 
                 </header> :
                 <header className="signedOut-header">
