@@ -3,15 +3,18 @@ import React from 'react';
 class Contact extends React.Component {
     constructor() {
         super();
-        this.state = {
-
-        }
     }
 
     render() {
-        return (
-            <h2>Hello from Contact</h2>
-        )
+        if (sessionStorage.getItem('userID')) {
+            return (
+                <h2>Logged in</h2>
+            )
+        } else {
+            return (
+                <h2>Not logged in</h2>
+            )
+        }
     }
 }
 
