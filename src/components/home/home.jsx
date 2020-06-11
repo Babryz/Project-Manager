@@ -25,7 +25,7 @@ class Home extends React.Component {
                 projects: data,
                 isLoaded: true
             })
-        } 
+        }
     }
 
     getStartedProjects = async () => {
@@ -53,6 +53,7 @@ class Home extends React.Component {
             ...this.state,
             category: e.target.value
         })
+        
     }
 
     componentDidMount() {
@@ -83,8 +84,6 @@ class Home extends React.Component {
                 <p>Loading...</p>
             )
         } else {
-            console.log(projects);
-            console.log(startedProjects);
             return (
                 <div className="home-container">
                     <aside>
@@ -93,7 +92,7 @@ class Home extends React.Component {
                              <div className="started">
                                  <h4>Started:</h4>
                                  <hr/>
-                                { error ? <p>{errorMessage}</p> : 
+                                { error ? <i>{errorMessage}</i> : 
                                 <ul>{startedProjects.map((project, i) => (
                                     <li key={i} ><Link to={`project/${project._id}`}>{project.title.length < 18 ? project.title : project.title.slice(0, 17) + '...'}</Link></li>
                                 ))}</ul> }

@@ -44,11 +44,11 @@ module.exports = {
             const { userId } = req.params;
             const projects = await Project.find({ createdBy: userId })
 
-            if (projects) {
+            if (projects.length !== 0) {
                 return res.json(projects);
             } else {
                 return res.status(400).json({
-                    message: "Seems like you don't haven't created or joined any projects yet, might be time to get up on the horse!"
+                    message: "You haven't created any projects yet, might be time!"
                 })
             }
         } catch (error) {

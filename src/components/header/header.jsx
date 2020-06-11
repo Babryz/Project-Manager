@@ -17,7 +17,7 @@ class Header extends React.Component {
     getUser = async () => {
         if (this.state.loggedIn && sessionStorage.getItem('userID')) {
           const userID = await sessionStorage.getItem('userID')
-          const apiCall = await fetch(`http://localhost:8000/users/${userID}`)
+          const apiCall = await fetch(`http://localhost:8000/users/${sessionStorage.getItem('userID')}`)
           const data = await apiCall.json()
           if (apiCall.status === 200) {
             this.setState({
