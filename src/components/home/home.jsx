@@ -122,6 +122,7 @@ class Home extends React.Component {
                                 </form>
                             </div>
                         </div>
+                        <i id="category">Showing { category === 'popular' ? 'most popular' : 'latest'} projects:</i>
                         <div className="browse">
                             { projects.map((project, i) => (
                                 <div className="project" key={i}>
