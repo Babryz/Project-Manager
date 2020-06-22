@@ -53,6 +53,7 @@ class App extends React.Component {
               <Switch>
                 <Route path="/" exact render={() => <Login checkLogin={this.checkLogin} />} />
                 <Route path="/sign-up" component={SignUp} />
+                <Route path="/contact" component={Contact} />
               </Switch>
             </div>
              }

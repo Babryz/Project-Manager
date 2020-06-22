@@ -64,6 +64,9 @@ class Header extends React.Component {
                 </header> :
                 <header className="signedOut-header">
                     <h1>Project Manager</h1>
+                    <nav>
+                        <Link to="/contact">Contact</Link>
+                    </nav>
                 </header> }
 
                 
