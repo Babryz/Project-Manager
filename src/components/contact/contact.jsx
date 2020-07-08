@@ -4,6 +4,11 @@ import './contact.css';
 class Contact extends React.Component {
     constructor() {
         super();
+        this.state = {
+            category: '',
+            description: '',
+            picture: null,
+        }
     }
 
     render() {
@@ -44,13 +49,11 @@ class Contact extends React.Component {
                             <div className="info logged-in">
                                 <div id="juan-info">
                                     <h3>Juan Pablo Orellana:</h3>
-                                    <p>Email:</p>
-                                    <p>juan.orellana@chasacademy.se</p>
+                                    <p>Email: juan.orellana@chasacademy.se</p>
                                 </div>
                                 <div id="babryz-info">
                                     <h3>Emil Babra:</h3>
-                                    <p>Email: </p>
-                                    <p>emil.babra@chasacademy.se</p>
+                                    <p>Email: emil.babra@chasacademy.se</p>
                                 </div>
                             </div>
                         </div>
@@ -75,13 +78,11 @@ class Contact extends React.Component {
                         <div className="info">
                             <div id="juan-info">
                                 <h3>Juan Pablo Orellana:</h3>
-                                <p>Email:</p>
-                                <p>juan.orellana@chasacademy.se</p>
+                                <p>Email: juan.orellana@chasacademy.se</p>
                             </div>
                             <div id="babryz-info">
                                 <h3>Emil Babra:</h3>
-                                <p>Email: </p>
-                                <p>emil.babra@chasacademy.se</p>
+                                <p>Email: emil.babra@chasacademy.se</p>
                             </div>
                         </div>
                     </div>
