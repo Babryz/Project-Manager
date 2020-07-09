@@ -52,6 +52,8 @@ nav>a:hover {
 
 .logout-box {
     width: 25%;
+    align-self: flex-end;
+    margin: 20px;
     display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -67,4 +69,89 @@ nav>a:hover {
     padding: 5px;
     border-radius: 50px;
 
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.drop-btn {
+    cursor: pointer;
+    align-self: flex-end;
+    justify-self: flex-end;
+    display: flex;
+        align-items: center;
+}
+
+.drop-btn>* {
+    pointer-events: none;
+}
+
+.drop-btn:focus, .drop-btn:hover {
+    border-radius: 25%;
+    box-shadow: 2px 2px 10px #EFEBCA;
+    padding: 2px;
+}
+
+#user-logo {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+#drop-arrow {
+    max-width: 15px;
+    max-height: 15px;
+    margin: 3px;
+}
+
+.dropdown-content {
+    display: none;
+    max-height: 0;
+    list-style: none;
+    position: absolute;
+    right: 0px;
+    background-color: #EFEBCA;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    overflow: hidden;
+}
+
+.dropdown-content>ul {
+    list-style: none;
+}
+
+.show {
+    display: block;
+    animation-name: dropdown;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+}
+
+@keyframes dropdown {
+    0% {max-height: 0}
+    100% {max-height: 200px;}
+}
+
+.dropdown-content li {
+    width: fit-content;
+    cursor: pointer;
+    margin: 3px;
+    font-weight: 600;
+    transition-property: all;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in;
+}
+
+.dropdown-content li:hover {
+    border-radius: 10px;
+    padding: 3px;
+    margin-left: 0px;
+    box-shadow: 2px 2px 10px #111111;
+    text-decoration: underline;
 }
