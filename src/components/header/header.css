@@ -67,7 +67,7 @@ nav>a:hover {
 
 .rotate {
     transition-property: all;
-    transition-duration: 500ms;
+    transition-duration: 300ms;
     transition-timing-function: ease-in;
     transform: rotateX(180deg);
 }
@@ -129,7 +129,7 @@ nav>a:hover {
 .show {
     display: block;
     animation-name: dropdown;
-    animation-duration: 500ms;
+    animation-duration: 300ms;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
 }
@@ -153,6 +153,6 @@ nav>a:hover {
     border-radius: 10px;
     padding: 3px;
     margin-left: 0px;
-    box-shadow: 2px 2px 10px #111111;
+    box-shadow: 1px 1px 8px #111111;
     text-decoration: underline;
 }
