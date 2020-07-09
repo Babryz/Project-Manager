@@ -8,10 +8,12 @@ import './header.css';
 window.onclick = function(e) {
     if (!e.target.matches('.drop-btn') && !e.target.matches('.dropdown-content')) {
        let dropdown = document.getElementById('dropdown-menu');
+       let arrow = document.getElementById('drop-arrow');
         if (!dropdown) {
             return;
         } else if (dropdown.classList.contains('show')) {
             dropdown.classList.remove('show');
+            arrow.classList.remove('rotate');
         }
     }
 }
@@ -54,6 +56,7 @@ class Header extends React.Component {
 
     handleClick = () => {
         document.getElementById('dropdown-menu').classList.toggle('show');
+        document.getElementById('drop-arrow').classList.toggle('rotate');
     }
 
     render() {
@@ -73,6 +76,7 @@ class Header extends React.Component {
 
                     </div>
                     <div className="logout-box">
+                        <p>{user.firstName}</p>
                         <div className="dropdown">
                             <div className="drop-btn" onClick={this.handleClick}>
                                 <img src={UserLogo} alt="" id="user-logo"/>

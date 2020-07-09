@@ -60,15 +60,16 @@ nav>a:hover {
 }
 
 .logout-box>p {
+    font-weight: 500;
+    margin-right: 5px;
     color: #EFEBCA;
 }
 
-#sign-out {
-    background-color: #EFEBCA;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 50px;
-
+.rotate {
+    transition-property: all;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in;
+    transform: rotateX(180deg);
 }
 
 .dropdown {
