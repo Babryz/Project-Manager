@@ -1,7 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import UserLogo from '../../pictures/user.png';
+import DropLogo from '../../pictures/dropdown.png';
 
 import './header.css';
+
+const Navbar = () => {
+
+    const handleClick = () => {
+        document.getElementById('dropdown-menu').classList.toggle('show');
+    }
+
+    window.onclick = function(e) {
+        if (!e.target.matches('.drop-btn')) {
+          let dropdown = document.getElementById('dropdown-menu');
+          if (dropdown.classList.contains('show')) {
+              dropdown.classList.remove('show');
+          }
+        }
+      }
+
+    return (
+        <div className="dropdown">
+            <div className="drop-btn" onClick={handleClick}>
+                <img src={UserLogo} alt="" id="user-logo"/>
+                <img src={DropLogo} alt="" id="drop-arrow"/>
+            </div>
+            <nav id="dropdown-menu" className="dropdown-content">
+                <ul>
+                    <li>My profile</li>
+                    <li>Other</li>
+                    <li>Log Out</li>
+                </ul>
+            </nav>
+        </div>
+    )
+}
 
 class Header extends React.Component {
     constructor(props) {
@@ -58,8 +92,7 @@ class Header extends React.Component {
 
                     </div>
                     <div className="logout-box">
-                        <p><strong>{user.email}</strong></p>
-                        <button id="sign-out" onClick={this.props.logout}><strong>Sign Out</strong></button>
+                        <Navbar />
                     </div> 
                 </header> :
                 <header className="signedOut-header">
