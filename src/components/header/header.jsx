@@ -5,36 +5,15 @@ import DropLogo from '../../pictures/dropdown.png';
 
 import './header.css';
 
-const Navbar = () => {
-
-    const handleClick = () => {
-        document.getElementById('dropdown-menu').classList.toggle('show');
-    }
-
-    window.onclick = function(e) {
-        if (!e.target.matches('.drop-btn')) {
-          let dropdown = document.getElementById('dropdown-menu');
-          if (dropdown.classList.contains('show')) {
-              dropdown.classList.remove('show');
-          }
+window.onclick = function(e) {
+    if (!e.target.matches('.drop-btn') && !e.target.matches('.dropdown-content')) {
+       let dropdown = document.getElementById('dropdown-menu');
+        if (!dropdown) {
+            return;
+        } else if (dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
         }
-      }
-
-    return (
-        <div className="dropdown">
-            <div className="drop-btn" onClick={handleClick}>
-                <img src={UserLogo} alt="" id="user-logo"/>
-                <img src={DropLogo} alt="" id="drop-arrow"/>
-            </div>
-            <nav id="dropdown-menu" className="dropdown-content">
-                <ul>
-                    <li>My profile</li>
-                    <li>Other</li>
-                    <li>Log Out</li>
-                </ul>
-            </nav>
-        </div>
-    )
+    }
 }
 
 class Header extends React.Component {
@@ -73,7 +52,9 @@ class Header extends React.Component {
         }
     }
 
-    
+    handleClick = () => {
+        document.getElementById('dropdown-menu').classList.toggle('show');
+    }
 
     render() {
         const { user } = this.state;
@@ -92,7 +73,19 @@ class Header extends React.Component {
 
                     </div>
                     <div className="logout-box">
-                        <Navbar />
+                        <div className="dropdown">
+                            <div className="drop-btn" onClick={this.handleClick}>
+                                <img src={UserLogo} alt="" id="user-logo"/>
+                                <img src={DropLogo} alt="" id="drop-arrow"/>
+                            </div>
+                            <nav id="dropdown-menu" className="dropdown-content">
+                                <ul>
+                                    <li><Link to="myProfile">My Profile</Link></li>
+                                    <li>Other</li>
+                                    <li onClick={this.props.logout}>Log Out</li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div> 
                 </header> :
                 <header className="signedOut-header">
