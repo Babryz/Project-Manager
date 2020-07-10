@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 app.get('/users/:userId', UserController.getById);
 app.post('/register', UserController.store);
 app.post('/login', UserController.login);
+app.put('/editUser', UserController.edit);
 
 app.post('/addProject', ProjectController.store);
 app.get('/projects', ProjectController.getAllProjects);

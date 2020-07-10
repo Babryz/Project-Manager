@@ -9,6 +9,7 @@ import Header from './components/header/header';
 import Home from './components/home/home';
 import Contact from './components/contact/contact';
 import MyProfile from './components/myProfile/myProfile';
+import EditProfile from './components/editProfile/editProfile';
 
 
 class App extends React.Component {
@@ -69,6 +70,7 @@ class App extends React.Component {
                 <Route path="/" exact component={Home} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/myProfile" render={() => <MyProfile user={this.state.user} />} />
+                <Route path="/editProfile" render={() => <EditProfile user={this.state.user} />} />
               </Switch>
             </div>
 

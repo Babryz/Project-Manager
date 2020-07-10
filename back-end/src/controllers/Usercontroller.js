@@ -63,4 +63,21 @@ module.exports = {
             throw Error(error)
         }
     },
+
+    async edit(req, res) {
+        try {
+            const { email, firstName, lastName, alias } = req.body;
+            const user = await User.findOne(email);
+
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.alias = alias;
+
+            return res.status(200);
+        } catch (error) {
+            return res.status(400).json({
+                message: 'Could not update at this time, come back again later and try again.'
+            })
+        }
+    }
 }
