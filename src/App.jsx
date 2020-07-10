@@ -69,7 +69,8 @@ class App extends React.Component {
       return (
         <Router>
           <div>
-            <Header user={this.state.user} />
+            <Header user={this.state.user}
+                    logout={this.logout} />
             { loggedIn ? 
             <div>
               <Switch>

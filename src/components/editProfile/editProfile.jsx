@@ -41,7 +41,7 @@ class EditProfile extends React.Component {
         })
         const data = await apiCall.json();
         if (apiCall.status === 200) {
-            window.location.replace('http/localhost:3000/myProfile')
+            window.location.replace('/myProfile')
         } else {
             this.setState({
                 ...this.state,

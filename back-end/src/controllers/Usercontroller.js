@@ -31,7 +31,8 @@ module.exports = {
             return res.status(200).json({
                 firstName: user.firstName,
                 lastName: user.lastName,
-                email: user.email
+                email: user.email,
+                alias: user.alias
             });
 
         } catch (error) {
@@ -69,13 +70,12 @@ module.exports = {
             const { email, firstName, lastName, alias } = req.body;
             const user = await User.findOne({ email });
 
-            if (user) {
-                return res.status(200);
-            } else {
-                return res.status(400).json({
-                    message: 'Could not update at this time, come back again later and try again.'
-                })
-            }
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.alias = alias;
+
+            await user.save();
+            return res.status(200).json(user)
             
         } catch (error) {
             throw Error(error)
