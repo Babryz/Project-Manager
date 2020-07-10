@@ -21,37 +21,6 @@ window.onclick = function(e) {
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            user: {
-
-            },
-            userID: ''
-        }
-    }
-
-    getUser = async () => {
-          const userID = await sessionStorage.getItem('userID')
-          const apiCall = await fetch(`http://localhost:8000/users/${userID}`)
-          const data = await apiCall.json()
-          if (apiCall.status === 200) {
-            this.setState({
-              ...this.state,
-              user: data,
-              userID: sessionStorage.getItem('userID')
-            })
-          }
-    }
-
-    componentDidMount() {
-        if (sessionStorage.getItem('userID')) {
-            this.getUser();
-        }
-    }
-
-    componentDidUpdate() {
-        if (this.state.userID !== sessionStorage.getItem('userID')) {
-            this.getUser();
-        }
     }
 
     handleClick = () => {
@@ -60,7 +29,7 @@ class Header extends React.Component {
     }
 
     render() {
-        const { user } = this.state;
+        const { user } = this.props;
 
         return (
             <div>
@@ -85,7 +54,6 @@ class Header extends React.Component {
                             <nav id="dropdown-menu" className="dropdown-content">
                                 <ul>
                                     <li><Link to="myProfile">My Profile</Link></li>
-                                    <li>Other</li>
                                     <li onClick={this.props.logout}>Log Out</li>
                                 </ul>
                             </nav>

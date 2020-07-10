@@ -7,3 +7,16 @@
 body {
   background-color: #FFFDED;
 }
+
+.container {
+  margin: 35px;
+  padding: 10px;
+  background-color: #EFEBCA;
+  border-radius: 5em;
+  border: 1px solid black;
+  display: flex;
+}
+
+ul {
+  list-style: none;
+}

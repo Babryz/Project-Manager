@@ -8,6 +8,7 @@ import SignUp from './components/sign-up/signUp';
 import Header from './components/header/header';
 import Home from './components/home/home';
 import Contact from './components/contact/contact';
+import MyProfile from './components/myProfile/myProfile';
 
 
 class App extends React.Component {
@@ -15,6 +16,21 @@ class App extends React.Component {
     super();
     this.state = {
       loggedIn: sessionStorage.getItem('userID') ? true : false,
+      user: {},
+      userID:''
+    }
+  }
+
+  getUser = async () => {
+    const userID = await sessionStorage.getItem('userID')
+    const apiCall = await fetch(`http://localhost:8000/users/${userID}`)
+    const data = await apiCall.json()
+    if (apiCall.status === 200) {
+      this.setState({
+        ...this.state,
+        user: data,
+        userID: sessionStorage.getItem('userID')
+      })
     }
   }
 
@@ -31,6 +47,13 @@ class App extends React.Component {
       ...this.state,
       loggedIn: false
     })
+    window.location.replace('http://localhost:3000')
+  }
+
+  componentDidMount() {
+    if (sessionStorage.getItem('userID')) {
+      this.getUser();
+    }
   }
 
   render() {
@@ -39,12 +62,13 @@ class App extends React.Component {
       return (
         <Router>
           <div>
-            <Header logout={this.logout} />
+            <Header user={this.state.user} />
             { loggedIn ? 
             <div>
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/contact" component={Contact} />
+                <Route path="/myProfile" render={() => <MyProfile user={this.state.user} />} />
               </Switch>
             </div>
 

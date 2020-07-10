@@ -1,0 +1,34 @@
+#my-profile {
+    flex-direction: column;
+    align-items: center;
+}
+
+#my-profile h3 {
+    font-size: 1.6em;
+    margin: 0.4em;
+}
+
+.user-info {
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+
+.user-info>img {
+    max-width: 250px;
+}
+
+.other-info {
+    display: flex;
+        flex-direction: row;
+}
+
+.other-info div {
+    margin: 10px 100px;
+}
+
+.other-info ul, .other-info h4 {
+    text-align: center;
+}
