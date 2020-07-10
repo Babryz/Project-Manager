@@ -20,3 +20,18 @@ body {
 ul {
   list-style: none;
 }
+
+.standardBtn {
+  background-color: #24873A;
+  border: 2px solid black;
+  border-radius: 1em;
+  color: #EFEBCA;
+  font-size: 18px;
+  padding: 2px 20px;
+  margin: 8px;
+  cursor: pointer;
+}
+
+.standardBtn:hover {
+  box-shadow: 0px 0px 5px black;
+}

@@ -5,7 +5,6 @@
 
 #my-profile h3 {
     font-size: 1.6em;
-    margin: 0.4em;
 }
 
 .user-info {
@@ -29,6 +28,15 @@
     margin: 10px 100px;
 }
 
+.other-info h3 {
+    margin: 5px;
+}
+
 .other-info ul, .other-info h4 {
     text-align: center;
+}
+
+#editBtn>a {
+    color: #EFEBCA;
+    text-decoration: none;
 }
