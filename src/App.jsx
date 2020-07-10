@@ -57,6 +57,12 @@ class App extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (sessionStorage.getItem('userID')) {
+      this.getUser();
+    }
+  }
+
   render() {
     const {loggedIn } = this.state;
     

@@ -6,26 +6,82 @@ import UserLogo from '../../pictures/user.png';
 class EditProfile extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            firstName: this.props.user.firstName,
+            lastName: this.props.user.lastName,
+            alias: this.props.user.alias,
+            email: this.props.user.email,
+            error: false,
+            errorMessage: ''
+        }
+    }
+
+    apiCall = 'http://localhost:8000/editUser';
+
+    handleChange = (event) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.value
+        });
+    }
+
+    editUser = async () => {
+        const apiCall = await fetch(this.apiCall, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: this.state.email,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                alias: this.state.alias
+            })
+        })
+        const data = await apiCall.json();
+        if (apiCall.status === 200) {
+            window.location.replace('http/localhost:3000/myProfile')
+        } else {
+            this.setState({
+                ...this.state,
+                error: true,
+                errorMessage: data.message
+            })
+        }
+    }
+
+    handleSubmit = async (event) => {
+        event.preventDefault();
+        this.editUser()
+            .catch((err) => {sessionStorage.setItem('funcErr', err)})
     }
 
     render() {
-        const { user } = this.props;
+        const { firstName, 
+                lastName, 
+                alias, 
+                email,
+                error, 
+                errorMessage } = this.state;
 
         return (
             <div className="container" id="edit-profile">
-                <form action="">
+                <form action="" onSubmit={this.handleSubmit} >
                     <div className="user-info">
                         <img src={UserLogo} alt=""/>
-                        <label htmlFor="firstName">First Name: </label>
-                        <input type="text" value={user.firstName} id="firstName" name="firstName"/>
-                        <label htmlFor="lastName">Last Name: </label>
-                        <input type="text" value={user.lastName} id="lastName" name="lastName"/>
-                        <label htmlFor="alias">Alias</label>
-                        <input type="text" value={user.alias ? user.alias : ''} id="alias" name="alias"/>
                         <label htmlFor="email">Email: </label>
-                        <input type="text" value={user.email} id="email" name="email" readOnly disabled/>
+                        <input type="text" value={email} id="email" name="email" readOnly disabled/>
+                        <label htmlFor="firstName">First Name: </label>
+                        <input type="text" value={firstName} id="firstName" name="firstName" onChange={this.handleChange} />
+                        <label htmlFor="lastName">Last Name: </label>
+                        <input type="text" value={lastName} id="lastName" name="lastName" onChange={this.handleChange} />
+                        <label htmlFor="alias">Alias</label>
+                        <input type="text" value={alias} id="alias" name="alias" onChange={this.handleChange} />
                     </div>
+                    <input type="submit" value="Update"/>
                 </form>
+                { error ? <p>{errorMessage}</p> : <div></div>}
             </div>
         )
     }

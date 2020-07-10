@@ -25,7 +25,7 @@ class SignUp extends React.Component {
         });
     }
 
-    register = async (event) => {
+    register = async () => {
         const apiCall = await 
             fetch(this.apiCall, {
                 method: 'POST',
