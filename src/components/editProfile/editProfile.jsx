@@ -10,7 +10,7 @@ class EditProfile extends React.Component {
             firstName: this.props.user.firstName,
             lastName: this.props.user.lastName,
             alias: this.props.user.alias,
-            email: this.props.user.email,
+            email: this.props.user.email || null,
             error: false,
             errorMessage: ''
         }
@@ -33,7 +33,7 @@ class EditProfile extends React.Component {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                email: this.state.email,
+                email: this.props.user.email,
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 alias: this.state.alias
@@ -61,7 +61,6 @@ class EditProfile extends React.Component {
         const { firstName, 
                 lastName, 
                 alias, 
-                email,
                 error, 
                 errorMessage } = this.state;
 
@@ -71,13 +70,13 @@ class EditProfile extends React.Component {
                     <div className="user-info">
                         <img src={UserLogo} alt=""/>
                         <label htmlFor="email">Email: </label>
-                        <input type="text" value={email} id="email" name="email" readOnly disabled/>
+                        <input type="text" value={this.props.user.email || ''} id="email" name="email" readOnly disabled/>
                         <label htmlFor="firstName">First Name: </label>
-                        <input type="text" value={firstName} id="firstName" name="firstName" onChange={this.handleChange} />
+                        <input type="text" value={firstName !== undefined ? firstName : this.props.user.firstName || ''} id="firstName" name="firstName" onChange={this.handleChange} />
                         <label htmlFor="lastName">Last Name: </label>
-                        <input type="text" value={lastName} id="lastName" name="lastName" onChange={this.handleChange} />
+                        <input type="text" value={lastName !== undefined ? lastName : this.props.user.lastName || ''} id="lastName" name="lastName" onChange={this.handleChange} />
                         <label htmlFor="alias">Alias</label>
-                        <input type="text" value={alias} id="alias" name="alias" onChange={this.handleChange} />
+                        <input type="text" value={alias !== undefined ? alias : this.props.user.alias || ''} id="alias" name="alias" onChange={this.handleChange} />
                     </div>
                     <input type="submit" value="Update"/>
                 </form>

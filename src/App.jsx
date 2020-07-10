@@ -64,20 +64,20 @@ class App extends React.Component {
   }
 
   render() {
-    const {loggedIn } = this.state;
+    const { loggedIn, user } = this.state;
     
       return (
         <Router>
           <div>
-            <Header user={this.state.user}
+            <Header user={user}
                     logout={this.logout} />
             { loggedIn ? 
             <div>
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/contact" component={Contact} />
-                <Route path="/myProfile" render={() => <MyProfile user={this.state.user} />} />
-                <Route path="/editProfile" render={() => <EditProfile user={this.state.user} />} />
+                <Route path="/myProfile" render={() => <MyProfile user={user} />} />
+                <Route path="/editProfile" render={() => <EditProfile user={user} />} />
               </Switch>
             </div>
 
