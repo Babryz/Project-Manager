@@ -91,7 +91,6 @@ class Home extends React.Component {
                              <h3>Projects:</h3>
                              <div className="started">
                                  <h4>Started:</h4>
-                                 <hr/>
                                 { error ? <i>{errorMessage}</i> : 
                                 <ul>{startedProjects.map((project, i) => (
                                     <li key={i} ><Link to={`project/${project._id}`}>{project.title.length < 18 ? project.title : project.title.slice(0, 17) + '...'}</Link></li>
@@ -99,7 +98,6 @@ class Home extends React.Component {
                              </div>
                              <div className="joined">
                                  <h4>Joined:</h4>
-                                 <hr/>
                                  <ul >
                                      <li>Joined Project 1</li>
                                      <li>Joined Project 2</li>
