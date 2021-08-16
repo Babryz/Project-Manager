@@ -85,8 +85,8 @@ class Home extends React.Component {
             )
         } else {
             return (
-                <div className="home-container">
-                    <aside>
+                <div className="home-wrapper">
+                    <aside className="sidebar-container">
                         <nav className="sidebar">
                              <h3>Projects:</h3>
                              <div className="started">
@@ -108,8 +108,8 @@ class Home extends React.Component {
                              </div>
                         </nav>
                     </aside>
-                    <main>
-                        <div className="head">
+                    <main className="home-container">
+                        <div className="home-head">
                             <h2>Browse Projects</h2>
                             <div className="filter-container">
                                 <div className="btn-container">
