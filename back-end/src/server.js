@@ -17,10 +17,12 @@ app.get('/', (req, res) => {
     return res.send('<h1>Hello from express</h1>');
 })
 
+// User routes
 app.get('/users/:userId', UserController.getById);
 app.post('/register', UserController.store);
 app.post('/login', UserController.login);
 
+// Project routes
 app.post('/addProject', ProjectController.store);
 app.get('/projects', ProjectController.getAllProjects);
 app.get('/projects/:userId', ProjectController.getByUserId);
