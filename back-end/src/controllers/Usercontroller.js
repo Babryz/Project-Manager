@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
 module.exports = {
     async store(req, res) {
@@ -6,12 +7,14 @@ module.exports = {
             const { firstName, lastName, email, password } = req.body;
             const existentUser = await User.findOne({ email });
 
+            const hashedPassword = await bcrypt.hash(password, 10);
+
             if (!existentUser) {
                 const user = await User.create({
                         firstName: firstName,
                         lastName: lastName,
                         email: email,
-                        password: password
+                        password: hashedPassword
                     })
                     return res.json(user);
             } else {
@@ -47,7 +50,7 @@ module.exports = {
             const user = await User.findOne({ email });
 
             if (user) {
-                if (password === user.password) {
+                if (await bcrypt.compare(password, user.password)) {
                     return res.status(200).json(user._id);
                 } else {
                     return res.status(401).json({
