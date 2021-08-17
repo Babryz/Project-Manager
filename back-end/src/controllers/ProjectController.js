@@ -3,14 +3,21 @@ const Project = require('../models/Project');
 module.exports = {
     async store(req, res) {
         try {
-            const { title, description, createdBy } = req.body;
+            const { title, description, creator } = req.body;
             const existentProject = await Project.findOne({title});
 
             if (!existentProject) {
                 const project = await Project.create({
                     title: title,
                     description: description,
-                    createdBy: createdBy
+                    users: [
+                        {
+                            user_id: creator,
+                            creator: true,
+                            admin: true,
+                        }
+
+                    ]
                 })
                 return res.json(project);
             } else {
